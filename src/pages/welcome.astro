@@ -12,7 +12,7 @@ const description = "Get to know your weather maps and how to use them.";
         class="hidden relative lg:flex items-center px-4  md:justify-center  bg-sunny sm:px-6 lg:px-8"
       >
         <!-- <img src="/weather/fill/openweathermap/01d.svg" alt="Welcome" class="h-32" /> -->
-      
+      <canvas id="canvas3d"></canvas>
       </div>
 
       <div
@@ -77,4 +77,27 @@ const description = "Get to know your weather maps and how to use them.";
   };
   document.addEventListener("astro:after-swap", applyAnimations);
   document.addEventListener("astro:page-load", applyAnimations, { once: true });
+</script>
+
+<script>
+  import { Application } from '@splinetool/runtime';
+
+  const canvasAnimation = () => {
+    // requestAnimationFrame(async () => {
+      const canvasElement = document.getElementById("canvas3d") as HTMLCanvasElement;
+
+      if (canvasElement) {
+        requestIdleCallback(() => {
+          const app = new Application(canvasElement);
+          app.load('/spline/softclouds.splinecode').then(() => {
+            gsap.fromTo(canvasElement, { opacity: 0 }, { opacity: 1, duration: 1 });
+          });
+        });
+      }
+    // });
+  };
+
+  document.addEventListener("astro:page-load", canvasAnimation,{ once: true });
+  document.addEventListener("astro:after-swap", canvasAnimation);
+
 </script>
