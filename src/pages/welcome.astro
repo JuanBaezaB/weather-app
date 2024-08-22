@@ -81,23 +81,29 @@ const description = "Get to know your weather maps and how to use them.";
 
 <script>
   import { Application } from '@splinetool/runtime';
-
   const canvasAnimation = () => {
-    // requestAnimationFrame(async () => {
-      const canvasElement = document.getElementById("canvas3d") as HTMLCanvasElement;
-
-      if (canvasElement) {
-        requestIdleCallback(() => {
-          const app = new Application(canvasElement);
-          app.load('/spline/softclouds.splinecode').then(() => {
-            gsap.fromTo(canvasElement, { opacity: 0 }, { opacity: 1, duration: 1 });
-          });
+    const canvasElement = document.getElementById("canvas3d") as HTMLCanvasElement;
+    if (canvasElement) {
+      requestIdleCallback(() => {
+        const app = new Application(canvasElement);
+        app.load('/spline/softclouds.splinecode').then(() => {
+          gsap.fromTo(canvasElement, { opacity: 0 }, { opacity: 1, duration: 1 });
         });
-      }
-    // });
+      });
+    }
   };
 
   document.addEventListener("astro:page-load", canvasAnimation,{ once: true });
   document.addEventListener("astro:after-swap", canvasAnimation);
+</script>
 
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const startButton = document.getElementById("welcome-get-started");
+    if (startButton) {
+      startButton.addEventListener("click", () => {
+        document.cookie = "visited=true; path=/";
+      });
+    }
+  });
 </script>
