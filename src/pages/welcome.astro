@@ -1,0 +1,80 @@
+---
+import Layout from "@/layout/Layout.astro";
+
+const title = "Getting Started";
+const description = "Get to know your weather maps and how to use them.";
+---
+
+<Layout  title={title} description={description}>
+  <section class="bg-white min-h-screen">
+    <div class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+      <div
+        class="hidden relative lg:flex items-center px-4  md:justify-center  bg-sunny sm:px-6 lg:px-8"
+      >
+        <!-- <img src="/weather/fill/openweathermap/01d.svg" alt="Welcome" class="h-32" /> -->
+      
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24 space-y-16"
+      >
+        <div class="flex items-center justify-center w-32 h-32 mx-auto">
+          <img id="welcome-image" src="/weather/fill/openweathermap/01d.svg" alt="Welcome"  />
+        </div>
+        
+        <div
+          class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto text-center"
+        >
+          <h2 
+            id="welcome-title"
+            class="text-3xl font-bold leading-tight text-black sm:text-4xl">
+            Discorver the Weather in Your City
+          </h2>
+
+          <p 
+            id="welcome-description"
+            class="mt-4 text-base text-gray-600">
+            Get to know your weather maps and radar precipitation forecast
+          </p>
+
+          <!-- <a
+            href="/"
+            id="start-button"
+            class="mt-16 inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
+          >
+          Get Started
+          </a> -->
+          <!-- <a id="welcome-get-started" href="/" class="px-4 py-4 bg-blue-600">
+            hola
+          </a> -->
+          <a 
+            href="/" 
+            id="welcome-get-started"
+            class="mt-16 inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 text-base font-semibold text-white  bg-blue-600 md:w-auto rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:bg-blue-700" aria-label="Primary action">
+            Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+<script>
+  const applyAnimations = () => {
+    const welcomeTitle = document.getElementById("welcome-title");
+    const welcomeDescription = document.getElementById("welcome-description");
+    const welcomeGetStarted = document.getElementById("welcome-get-started");
+    const welcomeImage = document.getElementById("welcome-image");
+    if (welcomeTitle && welcomeDescription && welcomeGetStarted && welcomeImage) {
+      const ctx = gsap.context((context) => {
+        gsap.from("#welcome-image", { opacity: 0, duration: 1, delay: 0.5, x: -50 });
+        gsap.from("#welcome-title", { opacity: 0, duration: 1, delay: 1, y: 50 });
+        gsap.from("#welcome-description", { opacity: 0, duration: 1, delay: 1.5, y: 50 });
+        gsap.from("#welcome-get-started", { opacity: 0, duration: 1, delay: 2, y: 50, onComplete: () => {
+          ctx.revert();
+        }});
+      });
+    }
+  };
+  document.addEventListener("astro:after-swap", applyAnimations);
+  document.addEventListener("astro:page-load", applyAnimations, { once: true });
+</script>
