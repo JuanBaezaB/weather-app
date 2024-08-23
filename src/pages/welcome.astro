@@ -58,7 +58,7 @@ if (!Astro.cookies.has("visited")) {
     const welcomeGetStarted = document.getElementById("welcome-get-started");
     const welcomeImage = document.getElementById("welcome-image");
     if (welcomeTitle && welcomeDescription && welcomeGetStarted && welcomeImage) {
-      const ctx = gsap.context((context) => {
+      const ctx = gsap.context(() => {
         gsap.from("#welcome-image", { opacity: 0, duration: 1, delay: 0.5, x: -50 });
         gsap.from("#welcome-title", { opacity: 0, duration: 1, delay: 1, y: 50 });
         gsap.from("#welcome-description", { opacity: 0, duration: 1, delay: 1.5, y: 50 });

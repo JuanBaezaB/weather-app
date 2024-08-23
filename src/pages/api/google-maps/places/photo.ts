@@ -1,4 +1,5 @@
 // src/pages/api/place-photo.ts
+import { GOOGLE_MAPS_API_KEY } from "@/config";
 import type { APIRoute } from 'astro';
 import axios from 'axios';
 
@@ -12,7 +13,7 @@ export const GET: APIRoute = async ({ request }) => {
 
   try {
     const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=${process.env.GOOGLE_MAPS_API_KEY}`,
+      `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=${GOOGLE_MAPS_API_KEY}`,
       { responseType: 'arraybuffer' }
     );
 
