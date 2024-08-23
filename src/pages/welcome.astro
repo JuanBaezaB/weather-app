@@ -3,6 +3,11 @@ import Layout from "@/layout/Layout.astro";
 
 const title = "Getting Started";
 const description = "Get to know your weather maps and how to use them.";
+
+if (!Astro.cookies.has("visited")) {
+  Astro.cookies.set("visited", "true", { path: "/" });
+}
+
 ---
 
 <Layout  title={title} description={description}>
@@ -11,8 +16,7 @@ const description = "Get to know your weather maps and how to use them.";
       <div
         class="hidden relative lg:flex items-center px-4  md:justify-center  bg-sunny sm:px-6 lg:px-8"
       >
-        <!-- <img src="/weather/fill/openweathermap/01d.svg" alt="Welcome" class="h-32" /> -->
-      <canvas id="canvas3d"></canvas>
+        <canvas id="canvas"></canvas>
       </div>
 
       <div
@@ -36,19 +40,8 @@ const description = "Get to know your weather maps and how to use them.";
             class="mt-4 text-base text-gray-600">
             Get to know your weather maps and radar precipitation forecast
           </p>
-
-          <!-- <a
-            href="/"
-            id="start-button"
-            class="mt-16 inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700"
-          >
-          Get Started
-          </a> -->
-          <!-- <a id="welcome-get-started" href="/" class="px-4 py-4 bg-blue-600">
-            hola
-          </a> -->
           <a 
-            href="/" 
+            href="/"
             id="welcome-get-started"
             class="mt-16 inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 text-base font-semibold text-white  bg-blue-600 md:w-auto rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:bg-blue-700" aria-label="Primary action">
             Get Started
@@ -82,7 +75,7 @@ const description = "Get to know your weather maps and how to use them.";
 <script>
   import { Application } from '@splinetool/runtime';
   const canvasAnimation = () => {
-    const canvasElement = document.getElementById("canvas3d") as HTMLCanvasElement;
+    const canvasElement = document.getElementById("canvas") as HTMLCanvasElement;
     if (canvasElement) {
       requestIdleCallback(() => {
         const app = new Application(canvasElement);
@@ -95,15 +88,4 @@ const description = "Get to know your weather maps and how to use them.";
 
   document.addEventListener("astro:page-load", canvasAnimation,{ once: true });
   document.addEventListener("astro:after-swap", canvasAnimation);
-</script>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const startButton = document.getElementById("welcome-get-started");
-    if (startButton) {
-      startButton.addEventListener("click", () => {
-        document.cookie = "visited=true; path=/";
-      });
-    }
-  });
 </script>
