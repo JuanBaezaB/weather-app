@@ -14,7 +14,7 @@ if (!Astro.cookies.has("visited")) {
   <section class="bg-white min-h-screen">
     <div class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
       <div
-        transition:name="section-left"
+        transition:name="section-images"
         class="hidden relative lg:flex items-center px-4  md:justify-center  bg-sunny sm:px-6 lg:px-8"
       >
         <!-- <canvas id="canvas"></canvas> -->
@@ -59,16 +59,16 @@ if (!Astro.cookies.has("visited")) {
 </Layout>
 <script>
   const applyAnimations = () => {
-    const welcomeTitle = document.getElementById("welcome-title");
-    const welcomeDescription = document.getElementById("welcome-description");
-    const welcomeGetStarted = document.getElementById("welcome-get-started");
-    const welcomeImage = document.getElementById("welcome-image");
-    if (welcomeTitle && welcomeDescription && welcomeGetStarted && welcomeImage) {
+    const title = document.getElementById("welcome-title");
+    const description = document.getElementById("welcome-description");
+    const getStarted = document.getElementById("welcome-get-started");
+    const image = document.getElementById("welcome-image");
+    if (title && description && getStarted && image) {
       const ctx = gsap.context(() => {
-        gsap.from("#welcome-image", { opacity: 0, duration: 1, delay: 0.5, x: -50 });
-        gsap.from("#welcome-title", { opacity: 0, duration: 1, delay: 1, y: 50 });
-        gsap.from("#welcome-description", { opacity: 0, duration: 1, delay: 1.5, y: 50 });
-        gsap.from("#welcome-get-started", { opacity: 0, duration: 1, delay: 2, y: 50, onComplete: () => {
+        gsap.from(image, { opacity: 0, duration: 1, delay: 0.5, x: -50 });
+        gsap.from(title, { opacity: 0, duration: 1, delay: 1, y: 50 });
+        gsap.from(description, { opacity: 0, duration: 1, delay: 1.5, y: 50 });
+        gsap.from(getStarted, { opacity: 0, duration: 1, delay: 2, y: 50, onComplete: () => {
           ctx.revert();
         }});
       });
