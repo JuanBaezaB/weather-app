@@ -6,30 +6,69 @@ const description = "Page not found";
 ---
 <Layout title={title} description={description}>
   
-  <div class="grid min-h-screen grid-cols-1 grid-rows-[1fr,auto,1fr] bg-white lg:grid-cols-[max(50%,36rem),1fr]">
-    <main class="w-full px-6 py-24 mx-auto max-w-7xl sm:py-32 lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:px-24">
-      <div class="max-w-lg">
-        <p class="text-base font-semibold leading-8 text-gray-400">404</p>
-        <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Page not found
-        </h1>
-        <p class="mt-6 text-base leading-7 text-gray-600">
-          Sorry, we couldn’t find the page you’re looking for.
-        </p>
-        <div class="flex flex-col items-center gap-2 mx-auto mt-8 md:flex-row">
-          <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
-            Primary button
-          </button>
-          <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium duration-200 bg-gray-100 md:w-auto rounded-xl hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="Secondary action">
-            Secondary button
-          </button>
+  <section class="bg-white min-h-screen">
+    <div class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+    
+      <div
+        class="flex flex-col items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24 space-y-16"
+      >
+
+        <div
+          class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto text-center"
+        >
+          <h1 
+            id="404-title"
+            class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">404</h1>
+
+          <p 
+            id="404-subtitle"
+            class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">Something's missing.</p>
+          <p 
+            id="404-description"
+            class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, we can't find that page. You'll find lots to explore on the home page. </p>
+        </div>
+
+        <div>
+          <a
+            id="404-back-home"
+            href="/welcome"
+            class="inline-block px-6 py-3 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
+            Back to Homepage
+          </a>
         </div>
       </div>
-    </main>
-  
-    <div class="hidden lg:relative lg:col-start-2 lg:row-start-1 lg:row-end-4 lg:block bg-sunny">
-      <img src="/weather/fill/openweathermap/01d.svg"  alt="#_" class="absolute inset-0 object-cover  h-40">
-    </div>
-  </div>
 
+      <div
+        transition:name="section-left"
+        class="hidden relative lg:flex items-center px-4  md:justify-center  bg-sunny sm:px-6 lg:px-8">
+    
+    </div>
+
+    </div>
+  </section>
 </Layout>
+
+<script>
+  const applyAnimations = () => {
+    const title = document.getElementById("404-title");
+    const subtitle = document.getElementById("404-subtitle");
+    const description = document.getElementById("404-description");
+    const backHome = document.getElementById("404-back-home");
+    
+    if (title && subtitle && description && backHome) {
+
+      console.log("404 page loaded");
+      const ctx = gsap.context(() => {
+        gsap.from(title, { opacity: 0, duration: 1, delay: 0.5, y: -50 });
+        gsap.from(subtitle, { opacity: 0, duration: 1, delay: 1, y: -50 });
+        gsap.from(description, { opacity: 0, duration: 1, delay: 1.5, y: -50 });
+        gsap.from(backHome, { opacity: 0, duration: 1, delay: 2, y: -50, onComplete: () => {
+          ctx.revert();
+        }});
+      });
+    }
+  };
+  document.addEventListener("astro:after-swap", applyAnimations);
+  document.addEventListener("astro:page-load", applyAnimations, { once: true });
+</script>

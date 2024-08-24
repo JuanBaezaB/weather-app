@@ -14,15 +14,16 @@ if (!Astro.cookies.has("visited")) {
   <section class="bg-white min-h-screen">
     <div class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
       <div
+        transition:name="section-left"
         class="hidden relative lg:flex items-center px-4  md:justify-center  bg-sunny sm:px-6 lg:px-8"
       >
-        <canvas id="canvas"></canvas>
+        <!-- <canvas id="canvas"></canvas> -->
       </div>
 
       <div
         class="flex flex-col items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24 space-y-16"
       >
-        <div class="flex items-center justify-center w-32 h-32 mx-auto">
+        <div class="flex items-center justify-center w-40 h-40 mx-auto">
           <img id="welcome-image" src="/weather/fill/openweathermap/01d.svg" alt="Welcome"  />
         </div>
         
@@ -40,10 +41,15 @@ if (!Astro.cookies.has("visited")) {
             class="mt-4 text-base text-gray-600">
             Get to know your weather maps and radar precipitation forecast
           </p>
-          <a 
-            href="/"
+         
+        </div>
+
+        <div>
+          <a
             id="welcome-get-started"
-            class="mt-16 inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 text-base font-semibold text-white  bg-blue-600 md:w-auto rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:bg-blue-700" aria-label="Primary action">
+            href="/"
+            class="inline-block px-6 py-3 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
             Get Started
           </a>
         </div>
@@ -72,7 +78,7 @@ if (!Astro.cookies.has("visited")) {
   document.addEventListener("astro:page-load", applyAnimations, { once: true });
 </script>
 
-<script>
+<!-- <script>
   import { Application } from '@splinetool/runtime';
   const canvasAnimation = () => {
     const canvasElement = document.getElementById("canvas") as HTMLCanvasElement;
@@ -88,4 +94,4 @@ if (!Astro.cookies.has("visited")) {
 
   document.addEventListener("astro:page-load", canvasAnimation,{ once: true });
   document.addEventListener("astro:after-swap", canvasAnimation);
-</script>
+</script> -->
