@@ -1,35 +1,40 @@
 ---
+import { cn } from "@/utils/classes"
 interface Props {
   id: string
+  class?: string
 }
 
-const { id } = Astro.props
+const { 
+  id,
+  class: className
+} = Astro.props
 ---
 
-<!-- <button 
-  data-open-modal={id}
-  class="px-4 py-2 bg-blue-500 text-white rounded">
-  Open Modal {id}
-</button> -->
-
-  <!-- Modal -->
-<div data-overlay-id={id} class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
-  <div data-modal-id={id} class="bg-white p-6 rounded shadow-lg max-w-md w-full z-20">
-    <h2 class="text-xl font-bold mb-4">Modal Title  { id }</h2>
-    
+<div data-dialog-overlay-id={id} class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div 
+    data-dialog-content-id={id} 
+    class={
+      cn(
+        className ? className : 'bg-white p-4 rounded-lg',
+      )
+    }
+    >
+    <slot />
   </div>
 </div>
 
 
 <script is:inline define:vars={{ id }}>
   document.addEventListener("astro:page-load", () => {
-    const modal = document.querySelector(`[data-modal-id="${id}"]`);
-    const buttons = document.querySelectorAll(`[data-open-modal="${id}"]`);
-    const overlay = document.querySelector(`[data-overlay-id="${id}"]`);
+    const modal = document.querySelector(`[data-dialog-content-id="${id}"]`);
+    const buttons = document.querySelectorAll(`[data-dialog-open="${id}"]`);
+    const overlay = document.querySelector(`[data-dialog-overlay-id="${id}"]`);
 
     if (!modal || !buttons || !overlay) {
       return;
     }
+
     gsap.set(modal, { scale: 0.5 });
     gsap.set(overlay, { opacity: 0, display: 'none' });
 

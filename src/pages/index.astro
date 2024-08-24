@@ -1,5 +1,5 @@
 ---
-import Modal from "@/components/ui/Modal.astro";
+import { QuickSearchPanel } from "@/components/ui/QuickSearchPanel/QuickSearchPanel";
 import PageLayout from "@/layout/PageLayout.astro";
 
 const title = "Astro";
@@ -21,16 +21,12 @@ const description = "Build faster websites with less client-side Javascript.";
 				go welcome page
 			</a>
 
-			<button data-open-modal="modal1" class="px-4 py-2 bg-blue-500 text-white rounded">
+			<button data-dialog-open="quick-search-panel" class="px-4 py-2 bg-blue-500 text-white rounded">
 				Open Modal 1
 			</button>
 
-			<button data-open-modal="modal2" class="px-4 py-2 bg-blue-500 text-white rounded">
-				Open Modal 2
-			</button>
-
-			<Modal id="modal1" />
-			<Modal id="modal2" />
+			<!-- <QuickSearchPanel id="quick-search-panel" /> -->
+			 <QuickSearchPanel client:visible />
 		</main>
 	</div>
 </PageLayout>
