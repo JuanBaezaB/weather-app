@@ -17,6 +17,7 @@ export const GET: APIRoute = async ({ request }) => {
   const cachedData = await getFromCache<WeatherData>(cacheKey);
 
   if (cachedData) {
+    console.log(cachedData);
     return new Response(JSON.stringify(cachedData), { status: 200 });
   }
 

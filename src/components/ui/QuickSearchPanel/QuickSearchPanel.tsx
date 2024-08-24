@@ -1,24 +1,41 @@
 import type { Prediction } from "@/interfaces/prediction.interface";
-import { getPredictions } from "@/services/google-maps.service";
+import { getPlaceDetails, getPredictions } from "@/services/google-maps.service";
+import { setLocation } from "@/store/location.store";
 import { useState } from "react";
 import { SearchInput } from "./SearchInput";
 import SearchResults from "./SearchResults";
 
 
 export const QuickSearchPanel = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState<boolean>(true);
   const toggleOpen = () => setOpen(!open);
 
-  const [search, setSearch] = useState('');
-  const [addressPredictions, setAddressPredictions] = useState<Prediction[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
+  const [recentSearches, setRecentSearches] = useState<Prediction[]>([]);
+
+  const handlerSelectPrediction = async (prediction: Prediction) => {
+    const placeDetails = await getPlaceDetails(prediction.placeId);
+    setLocation(placeDetails.location);
+    setRecentSearches((prev) => {
+      const filteredSearches = prev.filter((item) => item !== prediction);
+      return [prediction, ...filteredSearches];
+    });
+    setSearch('');
+    setPredictions([]);
+  }
+
+  const clearRecentSearches = () => {
+    setRecentSearches([]);
+  }
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     try {
       const predictions: Prediction[] = await getPredictions(e.target.value);
-      setAddressPredictions(predictions);
+      setPredictions(predictions);
     } catch (error) {
-      setAddressPredictions([]);
+      setPredictions([]);
     }
   };
 
@@ -37,7 +54,7 @@ export const QuickSearchPanel = () => {
 
         >
           <SearchInput search={search} handleSearch={handleSearch} />
-          <SearchResults addressPredictions={addressPredictions} />
+          <SearchResults clearRecentSearches={clearRecentSearches} search={search} predictions={predictions} recentSearches={recentSearches} handlerSelectPrediction={handlerSelectPrediction} />
         </div>
 
       </div>
