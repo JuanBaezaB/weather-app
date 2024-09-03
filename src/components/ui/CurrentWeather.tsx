@@ -19,26 +19,25 @@ const CurrentWeather = () => {
     setCurrentWeather($currentWeather);
   }, [$currentWeather]);
 
-  useEffect(() => {
-    if (imageWeatherRef.current && imageWeatherRef.current.children.length > 0) {
-      gsap.fromTo(imageWeatherRef.current.children, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 1 });
-    }
+  // useEffect(() => {
+  //   if (imageWeatherRef.current && imageWeatherRef.current.children.length > 0) {
+  //     gsap.fromTo(imageWeatherRef.current.children, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 1 });
+  //   }
 
-    if (currentWeatherRef.current && currentWeatherRef.current.children.length > 0) {
-      gsap.fromTo(currentWeatherRef.current.children, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1 });
-    }
+  //   if (currentWeatherRef.current && currentWeatherRef.current.children.length > 0) {
+  //     gsap.fromTo(currentWeatherRef.current.children, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 1 });
+  //   }
 
-    if (weatherDetailsRef.current && weatherDetailsRef.current.children.length > 0) {
-      const children = weatherDetailsRef.current.children;
-      let delay = 0.2;
-      for (let i = 0; i < weatherDetailsRef.current.children.length; i++) {
-        gsap.fromTo(children[i], { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, delay: delay });
-        delay += 0.2;
-      }
-    }
-  }, [currentWeather]);
+  //   if (weatherDetailsRef.current && weatherDetailsRef.current.children.length > 0) {
+  //     const children = weatherDetailsRef.current.children;
+  //     let delay = 0.2;
+  //     for (let i = 0; i < weatherDetailsRef.current.children.length; i++) {
+  //       gsap.fromTo(children[i], { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, delay: delay });
+  //       delay += 0.2;
+  //     }
+  //   }
+  // }, [currentWeather]);
 
-  
 
   return (
     <div >
