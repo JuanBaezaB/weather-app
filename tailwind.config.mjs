@@ -14,6 +14,15 @@ export default {
 				mostlycloudy: '#F3E8D6',
 				mostlyclear: '#362947',
       },
+			width: {
+				'120': '30rem',
+				'112': '28rem',
+			},
+			spacing: {
+				'28': '7rem',
+				'112': '28rem',
+				'120': '30rem',
+			},
 		},
 	},
 	plugins: [

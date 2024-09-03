@@ -1,32 +1,23 @@
 ---
-import { QuickSearchPanel } from "@/components/ui/QuickSearchPanel/QuickSearchPanel";
 import PageLayout from "@/layout/PageLayout.astro";
 
-const title = "Astro";
-const description = "Build faster websites with less client-side Javascript.";
+const title = "Weather App";
+const description = "Weather App built with Astro";
 
 ---
 
 <PageLayout title={title} description={description}>
-	<div class="flex flex-col items-center justify-center min-h-screen py-2">
-		<header class="flex flex-col items-center justify-center">
-			<h1 class="text-4xl font-bold mt-4">Welcome to Astro</h1>
-		</header>
-		<main class="flex flex-col items-center justify-center flex-1 px-20 text-center">
-			<p class="mt-4 text-lg">
-				To get started, edit <code class="p-2 font-mono text-sm bg-gray-100 rounded-md">src/pages/index.astro</code> and save to reload.
-			</p>
-			<a href="https://docs.astro.build" class="mt-4 text-blue-500 hover:underline">Learn Astro</a>
-			<a href="/welcome">
-				go welcome page
-			</a>
-
-			<button data-dialog-open="quick-search-panel" class="px-4 py-2 bg-blue-500 text-white rounded">
-				Open Modal 1
-			</button>
-
-			<!-- <QuickSearchPanel id="quick-search-panel" /> -->
-			 <QuickSearchPanel client:visible />
-		</main>
+	<nav class="flex flex-row space-x-4">
+		<a href="/" class="text-lg font-semibold text-slate-900 dark:text-white">Home</a>
+		<a href="/forecast/daily" class="text-lg font-semibold text-slate-900 dark:text-white">Daily</a>
+		<a href="/forecast/hourly" class="text-lg font-semibold text-slate-900 dark:text-white">Hourly</a>
+		<a href="/forecast/weekly" class="text-lg font-semibold text-slate-900 dark:text-white">Weekly</a>
+	</nav>
+	
+	<div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 ">
+		<h1 class="text-4xl font-bold text-gray-900 dark:text-white">Welcome to Astro</h1>
+		<p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
+			Build faster websites with less client-side Javascript.
+		</p>
 	</div>
 </PageLayout>

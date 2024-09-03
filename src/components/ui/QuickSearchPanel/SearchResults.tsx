@@ -1,6 +1,9 @@
 import type { Prediction } from "@/interfaces/prediction.interface copy";
 import { FaceFrownIcon } from "@heroicons/react/24/solid";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 import { SearchResultsItem } from "./SearchResultsItem";
+
 interface SearchResultsProps {
   search: string;
   predictions: Prediction[];
@@ -15,6 +18,26 @@ const SearchResults = ({
   handlerSelectPrediction,
   clearRecentSearches
 }: SearchResultsProps) => {
+  const predictionsRef = useRef<HTMLUListElement>(null);
+  const recentSearchesRef = useRef<HTMLUListElement>(null);
+  useEffect(() => {
+    if (recentSearchesRef.current) {
+      gsap.fromTo(recentSearchesRef.current.children, 
+        { opacity: 0, y: -20 }, 
+        { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }
+      );
+    }
+  }, [recentSearches]);
+
+  useEffect(() => {
+    if (predictionsRef.current?.children && predictionsRef.current.children.length > 0) {
+      gsap.fromTo(predictionsRef.current.children, 
+        { opacity: 0, y: -20 }, 
+        { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }
+      );
+    }
+  }, [predictions]);
+
 
   return (
     <ul
@@ -33,10 +56,7 @@ const SearchResults = ({
               Clear
             </button>
           </div>
-          {/* <h2 className="mt-4 mb-2 px-3 text-xs font-semibold text-gray-900 text-left">
-            Recent searches
-          </h2> */}
-          <ul className="text-sm text-gray-700">
+          <ul ref={recentSearchesRef} className="text-sm text-gray-700">
             <h2 className="sr-only">Recent searches</h2>
             {
               recentSearches.map((recentSearch, index) => (
@@ -48,7 +68,7 @@ const SearchResults = ({
       )}
       <li className="p-2">
         <h2 className="sr-only">Locations</h2>
-        <ul className="text-sm text-gray-700">
+        <ul ref={predictionsRef} className="text-sm text-gray-700">
           {
             predictions.map((prediction) => (
               <SearchResultsItem handlerSelectPrediction={handlerSelectPrediction} key={prediction.placeId} prediction={prediction} icon="MapPinIcon" />

@@ -1,0 +1,27 @@
+---
+import PageLayout from "@/layout/PageLayout.astro";
+
+const title = "Daily forecast";
+const description = "Daily forecast for the next 7 days";
+
+---
+
+<PageLayout title={title} description={description}>
+  <header class="flex justify-start items-center">
+    <div class="flex items-center gap-4">
+      <a href="/" class="text-lg font-semibold text-slate-900 dark:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </a>  
+    </div>
+  </header>
+
+	<div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 ">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Hourly forecast</h1>
+    <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
+      Here you can find the hourly forecast for the next 24 hours.
+    </p>
+  </div>
+  
+</PageLayout>

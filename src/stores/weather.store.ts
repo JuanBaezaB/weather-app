@@ -2,7 +2,6 @@ import type { Location } from "@/interfaces/location.interface";
 import type { WeatherData } from "@/interfaces/weather.interface";
 import { getWeather } from "@/services/weather.service";
 import { persistentAtom } from "@nanostores/persistent";
-import { onSet } from "nanostores";
 
 export const weatherStore = persistentAtom<WeatherData | null>('weather', null, {
   encode (value) {
@@ -36,8 +35,8 @@ export async function fetchWeather(location: Location) {
 	}
 }
 
-onSet(weatherStore, (weather) => {
-  if (weather.newValue) {
-    console.log('New weather:', weather.newValue);
-  }
-});
+// onSet(weatherStore, (weather) => {
+//   if (weather.newValue) {
+//     console.log('New weather:', weather.newValue);
+//   }
+// });

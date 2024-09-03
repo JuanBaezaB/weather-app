@@ -1,13 +1,13 @@
 import type { Prediction } from "@/interfaces/prediction.interface";
 import { getPlaceDetails, getPredictions } from "@/services/google-maps.service";
-import { setLocation } from "@/store/location.store";
+import { setLocation } from "@/stores/location.store";
 import { useState } from "react";
 import { SearchInput } from "./SearchInput";
 import SearchResults from "./SearchResults";
 
 
 export const QuickSearchPanel = () => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const toggleOpen = () => setOpen(!open);
 
   const [search, setSearch] = useState<string>('');
@@ -32,6 +32,10 @@ export const QuickSearchPanel = () => {
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     try {
+      if (e.target.value.length === 0) {
+        setPredictions([]);
+        return;
+      }
       const predictions: Prediction[] = await getPredictions(e.target.value);
       setPredictions(predictions);
     } catch (error) {
@@ -51,7 +55,6 @@ export const QuickSearchPanel = () => {
           className={`
             mx-auto max-w-2xl transform divide-y divide-gray-500 divide-opacity-10 overflow-hidden rounded-xl bg-white bg-opacity-80 shadow-2xl ring-1 ring-black ring-opacity-5 backdrop-blur backdrop-filter transition-all
             ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}`}
-
         >
           <SearchInput search={search} handleSearch={handleSearch} />
           <SearchResults clearRecentSearches={clearRecentSearches} search={search} predictions={predictions} recentSearches={recentSearches} handlerSelectPrediction={handlerSelectPrediction} />

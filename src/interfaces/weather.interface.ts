@@ -1,3 +1,11 @@
+export interface WeatherCondition {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+
 export interface WeatherCurrent {
   dt: number;
   sunrise: number;
@@ -12,12 +20,7 @@ export interface WeatherCurrent {
   visibility: number;
   wind_speed: number;
   wind_deg: number;
-  weather: Array<{
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }>;
+  weather: WeatherCondition[];
 }
 
 export interface WeatherDaily {
@@ -43,12 +46,7 @@ export interface WeatherDaily {
   dew_point: number;
   wind_speed: number;
   wind_deg: number;
-  weather: Array<{
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }>;
+  weather: WeatherCondition[];
   clouds: number;
   pop: number;
   uvi: number;
@@ -66,12 +64,7 @@ export interface WeatherHourly {
   visibility: number;
   wind_speed: number;
   wind_deg: number;
-  weather: Array<{
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }>;
+  weather: WeatherCondition[];
   pop: number;
 }
 
