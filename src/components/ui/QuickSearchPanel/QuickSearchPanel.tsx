@@ -23,13 +23,12 @@ export const QuickSearchPanel = () => {
   }, [$recentSearches]);
 
   const handlerSelectPrediction = async (prediction: Prediction) => {
-    // closeQuickSearch();
+    closeQuickSearch();
     const placeDetails = await getPlaceDetails(prediction.placeId);
     setLocation(placeDetails.location);
     setRecentSearch(prediction);
     setSearch('');
     setPredictions([]);
-    
   }
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {

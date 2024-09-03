@@ -5,6 +5,7 @@
   window.gsap = gsap;
 </script>
 <script>
+  import { openQuickSearch } from "@/stores/quickSearch.store";
   import type { Location } from "@/interfaces/location.interface";
   import { getLocation } from "@/services/location.service";
   import { getCurrentLocation, setLocation} from "@/stores/location.store";
@@ -15,4 +16,11 @@
       setLocation(location);
     });
   }
+
+  document.addEventListener("astro:page-load", function () {
+    const buttonsOpenSearchModal = document.querySelector(
+        "[data-button-open-quick-search-panel]"
+      );
+    buttonsOpenSearchModal?.addEventListener("click", openQuickSearch);
+  });
 </script>

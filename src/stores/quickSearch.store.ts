@@ -1,7 +1,7 @@
 import type { Prediction } from "@/interfaces/prediction.interface";
 import { atom } from "nanostores";
 
-export const quickSearchIsOpenStore = atom(true);
+export const quickSearchIsOpenStore = atom(false);
 
 export const setQuickSearchOpen = (open: boolean) => {
   quickSearchIsOpenStore.set(open);
