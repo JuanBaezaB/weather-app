@@ -9,7 +9,6 @@ export const getLocationByGeolocation = async (): Promise<Location> => {
       timeout: 5000, // Tiempo máximo de espera de 5 segundos
       maximumAge: 0, // No aceptar ubicaciones cacheadas
     };
-
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
   return {

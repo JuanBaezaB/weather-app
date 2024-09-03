@@ -1,6 +1,6 @@
 <script>
   import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+  import ScrollTrigger from "gsap/ScrollTrigger";
   gsap.registerPlugin(ScrollTrigger);
   window.gsap = gsap;
 </script>
@@ -9,12 +9,10 @@ import ScrollTrigger from "gsap/ScrollTrigger";
   import { getLocation } from "@/services/location.service";
   import { getCurrentLocation, setLocation} from "@/stores/location.store";
 
-  document.addEventListener("astro:page-load", function () {
-    const location: Location | null = getCurrentLocation();
-    if (!location) {
-      getLocation().then((location: Location) => {
-        setLocation(location);
-      });
-    }
-  }); 
+  const location: Location | null = getCurrentLocation();
+  if (!location) {
+    getLocation().then((location: Location) => {
+      setLocation(location);
+    });
+  }
 </script>

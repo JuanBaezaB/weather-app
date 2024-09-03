@@ -5,6 +5,7 @@ import type { APIRoute } from 'astro';
 import axios from 'axios';
 
 export const GET: APIRoute = async ({ request }) => {
+  console.log('GET /api/weather');
   const url = new URL(request.url);
   const lat = url.searchParams.get('lat');
   const lng = url.searchParams.get('lng');
@@ -15,10 +16,13 @@ export const GET: APIRoute = async ({ request }) => {
 
   const cacheKey = `weather-${lat}-${lng}`;
   const cachedData = await getFromCache<WeatherData>(cacheKey);
-
+  console.log('cachedData', cachedData);
   if (cachedData) {
+    console.log('Returning cached data');
     return new Response(JSON.stringify(cachedData), { status: 200 });
   }
+
+  console.log('Fetching data from OpenWeather API');
 
   try {
     const response = await axios.get<WeatherData>(

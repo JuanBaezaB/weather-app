@@ -40,6 +40,7 @@ locationStore.subscribe((location, oldValue) => {
 export const setLocation = (location: Location) => {
 	const currentLocation = locationStore.get();
 	if (location.lat === currentLocation?.lat && location.lng === currentLocation.lng) {
+		console.log('Location is the same');
 		return;
 	}
 	locationStore.set(location);

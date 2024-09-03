@@ -1,4 +1,5 @@
 import type { Prediction } from "@/interfaces/prediction.interface copy";
+import { clearRecentSearches } from "@/stores/recentSearches.store";
 import { FaceFrownIcon } from "@heroicons/react/24/solid";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
@@ -9,14 +10,12 @@ interface SearchResultsProps {
   predictions: Prediction[];
   recentSearches: Prediction[];
   handlerSelectPrediction: (prediction: Prediction) => void;
-  clearRecentSearches: () => void;
 }
 const SearchResults = ({ 
   search,
   predictions,
   recentSearches,
   handlerSelectPrediction,
-  clearRecentSearches
 }: SearchResultsProps) => {
   const predictionsRef = useRef<HTMLUListElement>(null);
   const recentSearchesRef = useRef<HTMLUListElement>(null);
